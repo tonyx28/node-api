@@ -18,12 +18,19 @@ var port = process.env.PORT || 8080;
 // =====================================================================
 var router = express.Router();
 
+// middleware to use for all requests
+router.use(function(req, res, next){
+  // do logging
+  console.log('Something is happening.');
+  next(); // make sure we go to the next routes and don't stop here
+})
+
 // test route to make sure things work
 router.get('/', function(req, res) {
   res.json({ message: 'hooray! welcome to our api!' });
 });
 
-// more routes for API
+// REGISTER OUR ROUTES -------------------------------------------------
 // all routes will be prefixed by /api
 app.use('/api', router);
 
